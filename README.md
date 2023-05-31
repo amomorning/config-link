@@ -1,6 +1,6 @@
 # Config link
 
-Automatically backup config file into [config-pool](amomorning/config-pool)
+Automatically backup config file in your backup folder.
 
 ## Installation
 
@@ -9,12 +9,54 @@ Automatically backup config file into [config-pool](amomorning/config-pool)
 ## Features
 
 - **Upload**
-  - `cp` file from `dest` to `src`
+  - `cp` file from `dst` to `src`
 - **Download**
-  - `mv` file from `dest` to `dest+'bak'` (if exist)
+  - `mv` original file from `dst` to `dst+'bak'`
   - create `src` dir
-  - `cp` file from `src` to `dest`
+  - create symbolic link from `src` to `dst`
+
+## Usage
+
+``` bash
+
+# clone repo
+git clone https://github.com/amomorning/config-link.git
+cd config-link
+
+# write your config.json 
+# for example in ~/backup/config.json
+
+# upload
+sudo python main.py --basepath "~/backup" upload
+
+sudo python main.py --basepath "~/backup" download
+```
 
 ## JSON config example
 
-## `config-pool` example
+``` json
+{
+    "vim": [
+        {
+            "src": "vim/autoload",
+            "dst": "~/.vim/autoload"
+        },
+        {
+            "src": "vim/.vimrc",
+            "dst": "~/.vimrc"
+        }
+    ]
+}
+```
+
+## Backup folder structure
+
+``` txt
+~/backup
+├── config.json
+└── vim
+    └── autoload
+        └── plug.vim
+
+3 directories, 2 files
+```
