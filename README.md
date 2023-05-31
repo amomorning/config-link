@@ -55,8 +55,10 @@ sudo python main.py --basepath "~/backup" download
 ~/backup
 ├── config.json
 └── vim
+    ├── .vimrc
     └── autoload
         └── plug.vim
 
 3 directories, 2 files
 ```
+
