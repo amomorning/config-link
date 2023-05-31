@@ -54,16 +54,17 @@ def download(ctx):
             src, dst = get_path(os.path.join(basepath, item['src'])), get_path(item['dst'])
 
             # create copy for existed files
-            if not os.path.exists(dst):
+            if not os.path.exists(dst) and not os.path.islink(dst):
                 parent = os.path.dirname(dst) # find parent path of dst
                 if not os.path.exists(parent):
                     os.makedirs(parent, 0o755, True) # mkdir -p
                     print(f'Parent path {parent} created')
             else:
-                backup = dst + '.bak'
-                while os.path.exists(backup): backup += '.bak'
-                general_copy(dst, backup)
-                print(f'Backup file {backup} created')
+                if os.path.exists(dst):
+                    backup = dst + '.bak'
+                    while os.path.exists(backup): backup += '.bak'
+                    general_copy(dst, backup)
+                    print(f'Backup file {backup} created')
                 os.system(f'rm -rf {dst}')
             
             os.symlink(src, dst, os.path.isdir(src))
