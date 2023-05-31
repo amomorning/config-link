@@ -13,7 +13,7 @@ Automatically backup config file in your backup folder.
 - **Download**
   - `mv` original file from `dst` to `dst+'bak'`
   - create `src` dir
-  - create symbolic link from `src` to `dst`
+  - create a symbolic link from `src` to `dst`
 
 ## Usage
 
