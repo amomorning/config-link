@@ -12,8 +12,14 @@ def general_copy(src, dst):
     if os.path.isdir(src):
         shutil.copytree(src, dst, dirs_exist_ok=True)
     elif os.path.isfile(src):
-        shutil.copy(src, dst)
-    print(f'File copied from {src=} to {dst=}')
+        # check if symlink
+        if os.path.islink(src):
+            print(f'Warning: {src} is a symlink, no copy performed.')
+        elif os.path.islink(dst):
+            print(f'Warning: {dst} is a symlink, no copy performed.')
+        else:
+            shutil.copy(src, dst)
+            print(f'File copied from {src=} to {dst=}')
 
 
 @click.group()
