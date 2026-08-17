@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cfglink"
+version = "0.2.0"
+description = "Symlink-based config backup pool manager"
+requires-python = ">=3.9"
+dependencies = ["click", "questionary"]
+
+[project.scripts]
+cfglink = "cfglink:main"
+
+[tool.setuptools]
+py-modules = ["cfglink"]
